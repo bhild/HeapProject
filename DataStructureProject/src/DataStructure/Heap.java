@@ -30,8 +30,14 @@ public class Heap {
 			return val;
 		}
 	}
-	public void addNode() {
-		
+	private Node head;
+	public Heap() {
+		head = null;
+	}
+	public void addNode(int n) {
+		if(head == null) {
+			head = new Node(n);
+		}
 	}
 	public void removeNode() {
 		
