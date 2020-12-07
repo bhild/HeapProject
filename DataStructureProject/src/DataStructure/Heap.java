@@ -107,13 +107,20 @@ public class Heap {
 			head = new Node(n);
 		}else {
 			DataStructure.Heap.LastElementTracker.Node nTrack = tracker.getNode();
-			Node tmepNode = head;
+			Node tempNode = head;
 			while(tracker.hasNext(nTrack)) {
-				
+				tempNode = tempNode.getChild(tracker.getNode().getData());
+			}
+			Node valNode = new Node(n);
+			if (tracker.getNode().getData()) {
+				tempNode.setChild(valNode);
 			}
 		}
 	}
 	public void removeNode() {
 		
+	}
+	public int output() {
+		return head.getChild(true).getVal();
 	}
 }
