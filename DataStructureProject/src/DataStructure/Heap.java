@@ -9,11 +9,9 @@ public class Heap {
 		}
 		public void setChild(Node n) {
 			if(children[0]==null) {
-				System.out.println(true);
 				children[0]=n;
 			}else {
 				children[1]=n;
-				System.out.println(children[1].getVal());
 			}
 		}
 		public Node getChild(boolean side) {
