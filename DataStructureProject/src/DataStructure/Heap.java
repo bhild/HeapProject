@@ -30,4 +30,10 @@ public class Heap {
 			return val;
 		}
 	}
+	public void addNode() {
+		
+	}
+	public void removeNode() {
+		
+	}
 }
