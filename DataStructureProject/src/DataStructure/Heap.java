@@ -9,9 +9,11 @@ public class Heap {
 		}
 		public void setChild(Node n) {
 			if(children[0]==null) {
+				System.out.println(true);
 				children[0]=n;
 			}else {
 				children[1]=n;
+				System.out.println(children[1].getVal());
 			}
 		}
 		public Node getChild(boolean side) {
@@ -24,7 +26,6 @@ public class Heap {
 		public boolean[] hasChildren() {
 			boolean[] returnArr = {children[0]!=null,children[1]!=null};
 			return returnArr;
-			
 		} 
 		public int getVal() {
 			return val;
@@ -112,15 +113,13 @@ public class Heap {
 				tempNode = tempNode.getChild(tracker.getNode().getData());
 			}
 			Node valNode = new Node(n);
-			if (tracker.getNode().getData()) {
-				tempNode.setChild(valNode);
-			}
+			tempNode.setChild(valNode);
 		}
 	}
 	public void removeNode() {
 		
 	}
-	public int output() {
-		return head.getChild(true).getVal();
+	public int output(boolean side) {
+		return head.getChild(side).getVal();
 	}
 }
