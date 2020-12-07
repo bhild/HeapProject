@@ -30,18 +30,6 @@ public class Heap {
 			return val;
 		}
 	}
-	private Node head;
-	public Heap() {
-		head = null;
-	}
-	public void addNode(int n) {
-		if(head == null) {
-			head = new Node(n);
-		}
-	}
-	public void removeNode() {
-		
-	}
 	private class LastElementTracker{
 		private Node n;
 		public LastElementTracker() {
@@ -57,7 +45,7 @@ public class Heap {
 				this.setData(data);
 				this.setNode(node);
 			}
-			public Object getData() {
+			public boolean getData() {
 				return data;
 			}
 			public void setData(boolean data) {
@@ -69,6 +57,9 @@ public class Heap {
 			public Node nextNode() {
 				return link;
 			}
+		}
+		public Node getNode() {
+			return n;
 		}
 		public void setNodeData(int nodeDepth,boolean input) {
 			Node n = this.n;
@@ -104,5 +95,25 @@ public class Heap {
 		public boolean hasNext(Node n) {
 			return n.nextNode()!=null;
 		}
+	}
+	private Node head;
+	private LastElementTracker tracker;
+	public Heap() {
+		head = null;
+		tracker = new LastElementTracker();
+	}
+	public void addNode(int n) {
+		if(head == null) {
+			head = new Node(n);
+		}else {
+			DataStructure.Heap.LastElementTracker.Node nTrack = tracker.getNode();
+			Node tmepNode = head;
+			while(tracker.hasNext(nTrack)) {
+				
+			}
+		}
+	}
+	public void removeNode() {
+		
 	}
 }
