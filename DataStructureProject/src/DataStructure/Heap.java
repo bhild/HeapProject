@@ -42,4 +42,67 @@ public class Heap {
 	public void removeNode() {
 		
 	}
+	private class LastElementTracker{
+		private Node n;
+		public LastElementTracker() {
+			n=new Node(true);
+		}
+		private class Node{
+			private boolean data;
+			private Node link = null;//instance of a self refrancing class
+			public Node(boolean data) {
+				this.setData(data);
+			}
+			public Node(boolean data,Node node) {
+				this.setData(data);
+				this.setNode(node);
+			}
+			public Object getData() {
+				return data;
+			}
+			public void setData(boolean data) {
+				this.data = data;
+			}
+			public void setNode(Node node) {
+				link = node;
+			}
+			public Node nextNode() {
+				return link;
+			}
+		}
+		public void setNodeData(int nodeDepth,boolean input) {
+			Node n = this.n;
+			try {
+				for (int i = 0; i < nodeDepth; i++) {
+					n = n.nextNode();
+				}
+				n.setData(input);
+			} catch (Exception e) {
+				System.err.println("no such node");
+			}
+		}
+		public void addNode(boolean data) {
+			Node temp = new Node(data,this.n);
+			this.n = temp;
+		}
+		public int size() {
+			Node n = this.n;
+			boolean a = true;
+			boolean b = false;
+			int returnVal = 0;
+			while(hasNext(n)) {
+				returnVal++;
+				n = n.nextNode();
+				if (b) {
+					a = false;
+				}else {
+					b = n.nextNode()==null;
+				}
+			}
+			return returnVal;
+		}
+		public boolean hasNext(Node n) {
+			return n.nextNode()!=null;
+		}
+	}
 }
