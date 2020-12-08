@@ -44,7 +44,7 @@ public class Heap {
 	private Node head;
 	private ArrayList<Boolean> tracker;
 	public Heap() {
-			
+		head = new Node(1,null);
 		tracker = new ArrayList<Boolean>();
 		tracker.add(true);
 	}
