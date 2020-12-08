@@ -25,6 +25,12 @@ public class Heap {
 				return children[1];
 			}
 		}
+		public Node getParent() {
+			return parent;
+		}
+		public void setVal(int val) {
+			this.val = val;
+		}
 		/*
 		public boolean[] hasChildren() {
 			boolean[] returnArr = {children[0]!=null,children[1]!=null};
@@ -54,6 +60,7 @@ public class Heap {
 		Node valNode = new Node(n,tempNode);
 		tempNode.setChild(valNode,tracker.get(tracker.size()-1));
 		//System.out.println();
+		sortMax(valNode);
 		updateTracker(tracker.size()-1);
 	}
 	public void removeNode() {
@@ -81,6 +88,21 @@ public class Heap {
 			if (tracker.get(element)==true&&element-1>=0) {
 				updateTracker(element-1);
 			}
+		}
+	}
+	private void sortMax(Node n) {
+		Node p = n.getParent();
+		boolean end = true;
+		while (!p.equals(null)&&end) {
+			if (n.getVal()>p.getVal()) {
+				int pStore = p.getVal();
+				p.setVal(n.getVal());
+				n.setVal(pStore);
+			}else {
+				end = false;
+			}
+			n=p;
+			p=p.getParent();
 		}
 	}
 }
