@@ -18,6 +18,6 @@ public class Tester {
 		heap.addNode(13);
 		heap.addNode(14);
 		heap.addNode(15);
-		System.out.println(heap.output(new boolean[] {false}));
+		System.out.println(heap.output(new boolean[] {true ,true,true}));
 	}
 }

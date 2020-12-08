@@ -44,7 +44,7 @@ public class Heap {
 	private Node head;
 	private ArrayList<Boolean> tracker;
 	public Heap() {
-		head = new Node(1,null);
+			
 		tracker = new ArrayList<Boolean>();
 		tracker.add(true);
 	}
@@ -91,9 +91,14 @@ public class Heap {
 		}
 	}
 	private void sortMax(Node n) {
-		Node p = n.getParent();
+		Node p = null;
+		try {
+			p = n.getParent();
+		} catch (Exception e) {
+			System.err.println("err");
+		}
 		boolean end = true;
-		while (!p.equals(null)&&end) {
+		while (p!=null&&end) {
 			if (n.getVal()>p.getVal()) {
 				int pStore = p.getVal();
 				p.setVal(n.getVal());
