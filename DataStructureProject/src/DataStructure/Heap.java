@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class Heap {
 	private class Node {
 		private Node children[] = new Node[2];
+		private Node parent;
 		private int val;
-		public Node(int val) {
+		public Node(int val,Node parent) {
 			this.val = val;
+			this.parent = parent;
 		}
 		public void setChild(Node n,boolean side) {
 			if(side) {
@@ -36,7 +38,7 @@ public class Heap {
 	private Node head;
 	private ArrayList<Boolean> tracker;
 	public Heap() {
-		head = new Node(1);
+		head = new Node(1,null);
 		tracker = new ArrayList<Boolean>();
 		tracker.add(true);
 	}
@@ -49,7 +51,7 @@ public class Heap {
 			}
 			//System.out.print(tempNode.getVal()+" "+n+" "+tracker.get(i)+"\t");
 		}
-		Node valNode = new Node(n);
+		Node valNode = new Node(n,tempNode);
 		tempNode.setChild(valNode,tracker.get(tracker.size()-1));
 		//System.out.println();
 		updateTracker(tracker.size()-1);
