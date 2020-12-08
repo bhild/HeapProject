@@ -6,6 +6,8 @@ public class Tester {
 		heap.addNode(1);
 		heap.addNode(2);
 		heap.addNode(3);
-		System.out.println(heap.output(false));
+		heap.addNode(4);
+		heap.addNode(5);
+		System.out.println(heap.output(new boolean[] {false,true}));
 	}
 }

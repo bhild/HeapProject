@@ -36,23 +36,47 @@ public class Heap {
 	public Heap() {
 		head = null;
 		tracker = new ArrayList<Boolean>();
+		tracker.add(true);
 	}
 	public void addNode(int n) {
 		if(head == null) {
 			head = new Node(n);
 		}else {
 			Node tempNode = head;
-			for(Boolean b : tracker) {
-				tempNode = tempNode.getChild(b);
+			for(int i = 1; i < tracker.size();i++) {
+				tempNode = tempNode.getChild(tracker.get(i));
 			}
 			Node valNode = new Node(n);
+			updateTracker(tracker.size()-1);
 			tempNode.setChild(valNode);
 		}
 	}
 	public void removeNode() {
 		
 	}
-	public int output(boolean side) {
-		return head.getChild(side).getVal();
+	public int output(boolean[] path) {
+		Node out = head;
+		try {
+			for (boolean i : path) {
+				out = out.getChild(i);
+			}
+		} catch (Exception e) {
+			System.err.println("no such node//path");
+		}
+		return out.getVal();
+	}
+	private void updateTracker(int element) {
+		if((element!=tracker.size()-1||tracker.size()==1)&&!tracker.contains(true)) {
+			for (int i = 0; i < tracker.size(); i++) {
+				tracker.set(i, true);
+			}
+			tracker.add(true);
+		}else {
+			tracker.set(element, !tracker.get(element));	
+			if (tracker.get(element)==true&&element-1>=0) {
+				System.out.println(true);
+				updateTracker(element-1);
+			}
+		}
 	}
 }
