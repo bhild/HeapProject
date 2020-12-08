@@ -81,6 +81,8 @@ public class Heap {
 		}
 		out.setVal(deep.getVal());
 		deep.getParent().setChild(null, tracker.get(tracker.size()-1));
+		sortMax(out);
+		backSortMax(out);
 	}
 	public int output(boolean[] path) {
 		Node out = head;
@@ -138,5 +140,36 @@ public class Heap {
 			n=p;
 			p=p.getParent();
 		}
+	}
+	private void backSortMax(Node n) {
+		Node[] children = new Node[2];
+		boolean side = true;
+		children[0] = n.getChild(true);
+		children[1] = n.getChild(false);
+		if(children[0]==null) {
+			return;
+		}
+		int temp = n.getVal();
+		if (children[1]!=null) {
+			if(children[0].getVal()>temp) {
+				n.setVal(children[0].getVal());
+				children[0].setVal(temp);	
+			}else if(children[1].getVal()>temp) {
+				side=false;
+				n.setVal(children[1].getVal());
+				children[1].setVal(temp);
+				
+			}else {
+				return;
+			}
+		}else {
+			if (children[0].getVal()>temp) {
+				n.setVal(children[0].getVal());
+				children[0].setVal(temp);
+			}else {
+				return;
+			}
+		} 
+		backSortMax(n.getChild(side));
 	}
 }
