@@ -15,7 +15,6 @@ public class Heap {
 			}else {
 				children[1]=n;
 			}
-			System.out.println(side+" child val: "+n.getVal()+" parent : "+this);
 		}
 		public Node getChild(boolean side) {
 			if(side) {
@@ -25,7 +24,7 @@ public class Heap {
 			}
 		}
 		/*
-		 * public boolean[] hasChildren() {
+		public boolean[] hasChildren() {
 			boolean[] returnArr = {children[0]!=null,children[1]!=null};
 			return returnArr;
 		} 
@@ -44,9 +43,9 @@ public class Heap {
 	public void addNode(int n) {
 		Node tempNode = head;
 		//System.out.print(tracker.get(0)+" ");
-		for(int i = 1; i < tracker.size();i++) {
+		for(int i = 0; i < tracker.size()-1;i++) {
 			if(tracker.size()!=1) {
-				tempNode = tempNode.getChild(tracker.get(i));					
+				tempNode = tempNode.getChild(tracker.get(i));	
 			}
 			//System.out.print(tempNode.getVal()+" "+n+" "+tracker.get(i)+"\t");
 		}
