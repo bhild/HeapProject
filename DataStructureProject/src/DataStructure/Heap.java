@@ -9,12 +9,13 @@ public class Heap {
 		public Node(int val) {
 			this.val = val;
 		}
-		public void setChild(Node n) {
-			if(children[0]==null) {
+		public void setChild(Node n,boolean side) {
+			if(side) {
 				children[0]=n;
 			}else {
 				children[1]=n;
 			}
+			System.out.println(side+" child val: "+n.getVal()+" parent : "+this);
 		}
 		public Node getChild(boolean side) {
 			if(side) {
@@ -23,10 +24,12 @@ public class Heap {
 				return children[1];
 			}
 		}
-		public boolean[] hasChildren() {
+		/*
+		 * public boolean[] hasChildren() {
 			boolean[] returnArr = {children[0]!=null,children[1]!=null};
 			return returnArr;
 		} 
+		*/
 		public int getVal() {
 			return val;
 		}
@@ -34,22 +37,23 @@ public class Heap {
 	private Node head;
 	private ArrayList<Boolean> tracker;
 	public Heap() {
-		head = null;
+		head = new Node(1);
 		tracker = new ArrayList<Boolean>();
 		tracker.add(true);
 	}
 	public void addNode(int n) {
-		if(head == null) {
-			head = new Node(n);
-		}else {
-			Node tempNode = head;
-			for(int i = 1; i < tracker.size();i++) {
-				tempNode = tempNode.getChild(tracker.get(i));
+		Node tempNode = head;
+		//System.out.print(tracker.get(0)+" ");
+		for(int i = 1; i < tracker.size();i++) {
+			if(tracker.size()!=1) {
+				tempNode = tempNode.getChild(tracker.get(i));					
 			}
-			Node valNode = new Node(n);
-			updateTracker(tracker.size()-1);
-			tempNode.setChild(valNode);
+			//System.out.print(tempNode.getVal()+" "+n+" "+tracker.get(i)+"\t");
 		}
+		Node valNode = new Node(n);
+		tempNode.setChild(valNode,tracker.get(tracker.size()-1));
+		//System.out.println();
+		updateTracker(tracker.size()-1);
 	}
 	public void removeNode() {
 		
@@ -66,7 +70,7 @@ public class Heap {
 		return out.getVal();
 	}
 	private void updateTracker(int element) {
-		if((element!=tracker.size()-1||tracker.size()==1)&&!tracker.contains(true)) {
+		if((element==tracker.size()-1||tracker.size()==1)&&!tracker.contains(true)) {
 			for (int i = 0; i < tracker.size(); i++) {
 				tracker.set(i, true);
 			}
@@ -74,7 +78,6 @@ public class Heap {
 		}else {
 			tracker.set(element, !tracker.get(element));	
 			if (tracker.get(element)==true&&element-1>=0) {
-				System.out.println(true);
 				updateTracker(element-1);
 			}
 		}
