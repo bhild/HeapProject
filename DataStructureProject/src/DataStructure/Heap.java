@@ -2,11 +2,13 @@ package DataStructure;
 
 import java.util.ArrayList;
 
+
 public class Heap {
 	private class Node {
 		private Node children[] = new Node[2];
 		private Node parent;
 		private int val;
+		public Node() {}
 		public Node(int val,Node parent) {
 			this.val = val;
 			this.parent = parent;
@@ -63,8 +65,22 @@ public class Heap {
 		sortMax(valNode);
 		updateTracker(tracker.size()-1);
 	}
-	public void removeNode() {
-		
+	public void removeNode(boolean[] path) {
+		Node out = head;
+		try {
+			for (boolean i : path) {
+				out = out.getChild(i);
+			}
+		} catch (Exception e) {
+			System.err.println("no such node//path");
+		}
+		updateTrackerBackWards(tracker.size()-1);
+		Node deep = head;
+		for (boolean i : tracker) {
+			deep=deep.getChild(i);
+		}
+		out.setVal(deep.getVal());
+		deep.getParent().setChild(null, tracker.get(tracker.size()-1));
 	}
 	public int output(boolean[] path) {
 		Node out = head;
@@ -83,6 +99,19 @@ public class Heap {
 				tracker.set(i, true);
 			}
 			tracker.add(true);
+		}else {
+			tracker.set(element, !tracker.get(element));	
+			if (tracker.get(element)==true&&element-1>=0) {
+				updateTracker(element-1);
+			}
+		}
+	}
+	private void updateTrackerBackWards(int element) {
+		if((element==tracker.size()-1||tracker.size()==1)&&!tracker.contains(false)) {
+			for (int i = 0; i < tracker.size(); i++) {
+				tracker.set(i, false);
+			}
+			tracker.remove(0);
 		}else {
 			tracker.set(element, !tracker.get(element));	
 			if (tracker.get(element)==true&&element-1>=0) {
