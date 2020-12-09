@@ -1,5 +1,7 @@
 package DataStructure;
 
+import java.util.ArrayList;
+
 public class Tester {
 	public static void main(String[] args) {
 		Heap heap = new Heap(1);
@@ -18,7 +20,7 @@ public class Tester {
 		heap.addNode(13);
 		heap.addNode(14);
 		heap.addNode(15);
-		heap.removeNode(new boolean[] {});
+		heap.setNode(new boolean[] {},10);
 		System.out.println(heap.output(new boolean[] {false,false,true}));
 	}
 }
