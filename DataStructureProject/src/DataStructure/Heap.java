@@ -84,6 +84,18 @@ public class Heap {
 		sortMax(out);
 		backSortMax(out);
 	}
+	public void setNode(boolean[] path, int val) {
+		Node out = head;
+		try {
+			for (boolean i : path) {
+				out = out.getChild(i);
+			}
+		} catch (Exception e) {
+			System.err.println("no such node//path");
+		}
+		sortMax(out);
+		backSortMax(out);
+	}
 	public int output(boolean[] path) {
 		Node out = head;
 		try {
