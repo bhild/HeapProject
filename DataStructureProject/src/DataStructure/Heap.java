@@ -92,7 +92,7 @@ public class Heap {
 			}
 		} catch (Exception e) {
 			System.err.println("no such node//path");
-		}
+		}	
 		sortMax(out);
 		backSortMax(out);
 	}
@@ -129,7 +129,7 @@ public class Heap {
 		}else {
 			tracker.set(element, !tracker.get(element));	
 			if (tracker.get(element)==true&&element-1>=0) {
-				updateTracker(element-1);
+				updateTrackerBackWards(element-1);
 			}
 		}
 	}
