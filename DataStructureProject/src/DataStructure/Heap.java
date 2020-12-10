@@ -153,6 +153,9 @@ public class Heap {
 			p=p.getParent();
 		}
 	}
+	public void popTop() {
+		removeNode(new boolean[] {});
+	}
 	private void backSortMax(Node n) {
 		Node[] children = new Node[2];
 		boolean side = true;
@@ -183,5 +186,8 @@ public class Heap {
 			}
 		} 
 		backSortMax(n.getChild(side));
+	}
+	public String toString() {
+		return "not yet implented";
 	}
 }
