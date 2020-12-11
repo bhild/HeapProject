@@ -238,13 +238,12 @@ public class Heap {
 	}
 	private int[] intPath() {
 		Node temp = head;
-		int[] returnArr = new int[tracker.size()];
-		for(int i = 0; i<returnArr.length;i++) {
-			returnArr[i] = temp.getVal();
-			System.out.print(tracker.get(i)+"-"+temp.getVal()+" ");
-			temp = temp.getChild(false);
+		int[] returnArr = new int[tracker.size()+1];
+		returnArr[0] = temp.getVal();
+		for(int i = 0; i<returnArr.length-1;i++) {
+			temp = temp.getChild(tracker.get(i));
+			returnArr[i+1] = temp.getVal();
 		}
-		System.out.println();
 		return returnArr;
 	}
 }
