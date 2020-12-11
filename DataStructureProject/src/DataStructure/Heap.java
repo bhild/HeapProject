@@ -74,7 +74,9 @@ public class Heap {
 		} catch (Exception e) {
 			System.err.println("no such node//path");
 		}
+		System.out.println(tracker);
 		updateTrackerBackWards(tracker.size()-1);
+		System.out.println(tracker);
 		Node deep = head;
 		for (boolean i : tracker) {
 			deep=deep.getChild(i);
@@ -128,7 +130,7 @@ public class Heap {
 			tracker.remove(0);
 		}else {
 			tracker.set(element, !tracker.get(element));	
-			if (tracker.get(element)==true&&element-1>=0) {
+			if (tracker.get(element)==false&&element-1>=0) {
 				updateTrackerBackWards(element-1);
 			}
 		}
@@ -188,6 +190,28 @@ public class Heap {
 		backSortMax(n.getChild(side));
 	}
 	public String toString() {
-		return "not yet implented";
+		updateTrackerBackWards(tracker.size()-1);
+		int size = tracker.size()+1;
+		String out = "Depth: "+size;
+		out+="\ngreatest element: "+head.getVal();
+		out+="\nfilled Nodes: "+((int)Math.pow(2, size-1)-1+lastLayerFilledNodes());
+		updateTracker(size-2);
+		return out;
+	}
+	private int lastLayerFilledNodes() {
+		int depth = tracker.size()+1;
+		if (!tracker.contains(true)) {
+			return depth*2;
+		}else if(!tracker.contains(false)) {
+			return 1;
+		}
+		int out = depth*2;
+		int sub = 0;
+		for (int i = 0; i < tracker.size(); i++) {
+			if (tracker.get(i)) {
+				sub-=out/(2*(i+1));
+			}
+		}
+		return out+sub;
 	}
 }

@@ -20,7 +20,8 @@ public class Tester {
 		heap.addNode(13);
 		heap.addNode(14);
 		heap.addNode(15);
-		heap.setNode(new boolean[] {},10);
-		System.out.println(heap.output(new boolean[] {false,false,true}));
+		heap.addNode(16);
+		heap.addNode(17);
+		System.out.println(heap.toString());
 	}
 }
