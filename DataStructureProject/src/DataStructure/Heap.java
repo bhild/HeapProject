@@ -195,6 +195,15 @@ public class Heap {
 		String out = "Depth: "+size;
 		out+="\ngreatest element: "+head.getVal();
 		out+="\nfilled Nodes: "+((int)Math.pow(2, size-1)-1+lastLayerFilledNodes());
+		int[][] allPaths = getAllPaths();
+		out+="\nall Paths:";
+		for (int i = 0; i < allPaths.length; i++) {
+			out+="\n\t"+i+": ";
+			for (int j = 0; j < allPaths[i].length; j++) {
+				out+=allPaths[i][j]+",";
+			}
+		}
+		
 		updateTracker(size-2);
 		return out;
 	}
@@ -213,5 +222,29 @@ public class Heap {
 			}
 		}
 		return out+sub;
+	}
+	private int[][] getAllPaths(){
+		int pathSize = tracker.size();
+		while (tracker.size()==pathSize) {
+			updateTrackerBackWards(pathSize-1);
+		}
+		updateTracker(tracker.size()-1);
+		int[][] output = new int[(int)Math.pow(2, pathSize)-1+lastLayerFilledNodes()][pathSize];
+		for (int i = 0; i < output.length; i++) {
+			output[i]=intPath();
+			updateTracker(pathSize-1);
+		}
+		return output;
+	}
+	private int[] intPath() {
+		Node temp = head;
+		int[] returnArr = new int[tracker.size()];
+		for(int i = 0; i<returnArr.length;i++) {
+			returnArr[i] = temp.getVal();
+			System.out.print(tracker.get(i)+"-"+temp.getVal()+" ");
+			temp = temp.getChild(false);
+		}
+		System.out.println();
+		return returnArr;
 	}
 }
