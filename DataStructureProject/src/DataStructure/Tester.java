@@ -1,5 +1,6 @@
 package DataStructure;
 
+import java.util.ArrayList;
 
 public class Tester {
 	public static void main(String[] args) {
@@ -21,5 +22,22 @@ public class Tester {
 		heap.addNode(15);
 
 		System.out.println(heap.toString());
+		heap.addNode(16);
+		heap.addNode(17);
+		heap.addNode(18);
+		heap.addNode(19);
+		heap.addNode(20);
+		heap.addNode(21);
+		heap.addNode(22);
+		heap.addNode(23);
+		heap.addNode(24);
+		heap.addNode(25);
+		heap.addNode(26);
+		heap.addNode(27);
+		heap.addNode(28);
+		heap.addNode(29);
+		heap.addNode(30);
+		System.out.println(heap.toString());
+
 	}
 }
