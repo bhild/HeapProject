@@ -191,51 +191,41 @@ public class Heap {
 	}
 	public String toString() {
 		updateTrackerBackWards(tracker.size()-1);
-		int size = tracker.size()+1;
-		String out = "Depth: "+size;
-		out+="\ngreatest element: "+head.getVal();
-		out+="\nfilled Nodes: "+((int)Math.pow(2, size-1)-1+lastLayerFilledNodes());
 		Object[][] allPaths = getAllPaths();
-		out+="\nall Paths:";
+		int nullCount = 0;
+		int size = tracker.size()+1;
+		String out = "";
+		out+="all Paths:";
 		for (int i = 0; i < allPaths.length; i++) {
 			out+="\n\t"+i+": ";
 			for (int j = 0; j < allPaths[i].length; j++) {
 				out+=allPaths[i][j]+",";
+				if (allPaths[i][j]==null) {
+					nullCount++;
+				}
 			}
 		}
+		out+="\nDepth: "+size;
+		out+="\ngreatest element: "+head.getVal();
+		out+="\nfilled Nodes: "+( (int)Math.pow(2, size)-1-nullCount);
 		
 		updateTracker(size-2);
 		return out;
 	}
-	private int lastLayerFilledNodes() {
-		ArrayList<Boolean> tempStore = tracker;
-		int depth = tracker.size()+1;
-		if (!tracker.contains(true)) {
-			return depth*2;
-		}else if(!tracker.contains(false)) {
-			return 1;
-		}
-		int out = depth*2;
-		int sub = 0;
-		for (int i = 0; i < tracker.size(); i++) {
-			if (tracker.get(i)) {
-				sub-=out/(2*(i+1));
-			}
-		}
-		tracker=tempStore;
-		return out+sub;
-	}
+
 	private Object[][] getAllPaths(){
 		int pathSize = tracker.size();
+		ArrayList<Boolean> tempStore = (ArrayList<Boolean>) tracker.clone();
 		while (tracker.size()==pathSize) {
 			updateTrackerBackWards(pathSize-1);
 		}
 		updateTracker(tracker.size()-1);
-		Object[][] output = new Object[(int)Math.pow(2, pathSize)-1+lastLayerFilledNodes()][pathSize];
+		Object[][] output = new Object[(int)Math.pow(2, pathSize)][pathSize];
 		for (int i = 0; i < output.length; i++) {
 			output[i]=intPath();
 			updateTracker(pathSize-1);
 		}
+		tracker = tempStore;
 		return output;
 	}
 	private Object[] intPath() {
