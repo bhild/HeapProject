@@ -98,17 +98,6 @@ public class Heap {
 		sortMax(out);
 		backSortMax(out);
 	}
-	public int output(boolean[] path) {
-		Node out = head;
-		try {
-			for (boolean i : path) {
-				out = out.getChild(i);
-			}
-		} catch (Exception e) {
-			System.err.println("no such node//path");
-		}
-		return out.getVal();
-	}
 	private void updateTracker(int element) {
 		if((element==tracker.size()-1||tracker.size()==1)&&!tracker.contains(true)) {
 			for (int i = 0; i < tracker.size(); i++) {
